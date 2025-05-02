@@ -1,7 +1,7 @@
 import os
 
 def read_capacity_matrix(filepath):
-    """Lit une matrice de capacité à partir d’un fichier .txt"""
+    """Read a capacity matrix from a .txt file"""
     with open(filepath, 'r') as file:
         lines = file.readlines()
         n = int(lines[0].strip())  # nombre de sommets
@@ -10,19 +10,19 @@ def read_capacity_matrix(filepath):
         for i in range(1, n+1):
             row = list(map(int, lines[i].strip().split()))
             if len(row) != n:
-                raise ValueError(f"Erreur : la ligne {i} ne contient pas {n} éléments.")
+                raise ValueError(f"Error : line {i} doesn't contain {n} elements.")
             capacity_matrix.append(row)
 
     return capacity_matrix
 
 def read_capacity_and_cost_matrix(filepath):
-    """Lit un fichier de flot de coût minimal et retourne les matrices capacité et coût."""
+    """Read a minimal cost flow file and return capacity and cost matrices."""
     with open(filepath, 'r') as file:
         lines = [line.strip() for line in file.readlines() if line.strip()]
     
     n = int(lines[0])
     if len(lines) != 1 + 2 * n:
-        raise ValueError(f"Format incorrect : {len(lines)} lignes trouvées pour n = {n}, attendu {1 + 2 * n}")
+        raise ValueError(f"Incorrect Format : {len(lines)} founded lines for n = {n}, expected {1 + 2 * n}")
     
     capacity_matrix = []
     cost_matrix = []
@@ -30,13 +30,13 @@ def read_capacity_and_cost_matrix(filepath):
     for i in range(1, 1 + n):
         row = list(map(int, lines[i].split()))
         if len(row) != n:
-            raise ValueError(f"Ligne de capacité {i} incorrecte : {row}")
+            raise ValueError(f"Capacity line {i} wrong : {row}")
         capacity_matrix.append(row)
 
     for i in range(1 + n, 1 + 2 * n):
         row = list(map(int, lines[i].split()))
         if len(row) != n:
-            raise ValueError(f"Ligne de coût {i} incorrecte : {row}")
+            raise ValueError(f"Cost line {i} wrong : {row}")
         cost_matrix.append(row)
 
     return capacity_matrix, cost_matrix

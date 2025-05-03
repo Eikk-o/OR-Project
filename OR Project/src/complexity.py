@@ -1,11 +1,11 @@
 import time
 import random
+import matplotlib.pyplot as plt
 from push_relabel import push_relabel
 from min_cost_flow import min_cost_flow
-# from ford_fulkerson import ford_fulkerson  # Uncomment if implemented
+from ford_fulkerson import ford_fulkerson 
 
 def create_random_flow_problem(n):
-
     # Initialize capacity and cost matrices with zeros
     C = [[0] * n for _ in range(n)]
     D = [[0] * n for _ in range(n)]
@@ -21,57 +21,94 @@ def create_random_flow_problem(n):
     return C, D
 
 
-def measure_execution_time(n_values):
+def measure_execution_time(n_values, algorithm="push_relabel"):
+
     nb_tries = 100
+    results = {}
 
     for n in n_values:
         print(f"\nFor n = {n} :")
-        pr_times = []
-        # min_cost_times = []
-        # ff_times = []
+        times = []
 
         for a in range(nb_tries):
             # Generate a random flow problem
             cap_mtx, cost_mtx = create_random_flow_problem(n)
 
-            # Measure Push-Relabel
-            start = time.perf_counter()
-            push_relabel(cap_mtx, 0, n - 1)
-            end = time.perf_counter()
-            pr_times.append(end - start)
+            # Measure the selected algorithm
+            if algorithm == "push_relabel":
+                start = time.perf_counter()
+                push_relabel(cap_mtx, 0, n - 1)
+                end = time.perf_counter()
+            elif algorithm == "min_cost_flow":
+                start = time.perf_counter()
+                min_cost_flow(n, cap_mtx, cost_mtx, 0, n - 1, F=None)  # F=None for max flow
+                end = time.perf_counter()
+            elif algorithm == "ford_fulkerson":
+                start = time.perf_counter()
+                ford_fulkerson(cap_mtx, 0, n - 1)
+                end = time.perf_counter()
+            else:
+                raise ValueError(f"Unknown algorithm: {algorithm}")
 
-            """ # Measure Min-Cost Flow
-            start = time.perf_counter()
-            min_cost_flow(n, cap_mtx, cost_mtx, 0, n - 1, F=None)  # F=None for max flow
-            end = time.perf_counter()
-            min_cost_times.append(end - start) """
+            times.append(end - start)
+            print(f"Iteration {a} for {algorithm}: {times[-1]:.6f} seconds")
 
-            """  # Measure Ford-Fulkerson (if implemented)
-            start = time.perf_counter()
-            ford_fulkerson(cap_mtx, 0, n - 1)
-            end = time.perf_counter()
-            ff_times.append(end - start) """
+        results[n] = times
 
-            # Print results
-            print(f"Iteration {a} for push_relabel: {pr_times[-1]:.6f} seconds")
+    return results
 
-        # Store average times
-        results["push_relabel"][n] = sum(pr_times) / nb_tries
-        # results["min_cost_flow"][n] = sum(min_cost_times) / nb_tries
-        # results["ford_fulkerson"][n] = sum(ff_times) / nb_tries
 
-    return pr_times
+def plot_results(results, algorithm):
+
+    plt.figure(figsize=(10, 6))
+
+    for n, times in results.items():
+        # Plot all 100 times for each n
+        plt.scatter([n] * len(times), times, label=f"n = {n}", alpha=0.6)
+
+    # Configure plot
+    plt.xlabel("Number of Vertices (n)")
+    plt.ylabel("Execution Time (seconds)")
+    plt.title(f"Execution Times for {algorithm}")
+    plt.grid(True)
+    plt.legend()
+    plt.xscale("log")  # Use logarithmic scale for x-axis
+    plt.yscale("log")  # Use logarithmic scale for y-axis
+    plt.show()
+
+
+def plot_worst_case(results, algorithm):
+
+    n_values = list(results.keys())
+    worst_times = [max(times) for times in results.values()]  # Get the worst time for each n
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(n_values, worst_times, marker="o", label=f"Worst-Case {algorithm}")
+
+    # Configure plot
+    plt.xlabel("Number of Vertices (n)")
+    plt.ylabel("Worst Execution Time (seconds)")
+    plt.title(f"Worst-Case Execution Times for {algorithm}")
+    plt.grid(True)
+    plt.legend()
+    plt.xscale("log")  # Use logarithmic scale for x-axis
+    plt.yscale("log")  # Use logarithmic scale for y-axis
+    plt.show()
+
 
 if __name__ == "__main__":
     # Values of n to test
-    n_values = [10, 20, 40, 100, 400, 1000, 4000]
+    n_values = [10, 20, 40, 100, 400]  # Reduced for faster testing
+    # n_values = [10, 20, 40, 100, 400, 1000, 4000] # Full range
+
+    # Specify the algorithm to measure
+    algo_to_run = "ford_fulkerson"  # "push_relabel" or "min_cost_flow" or "ford_fulkerson"
 
     # Measure execution times
-    results = measure_execution_time(n_values)
+    results = measure_execution_time(n_values, algorithm=algo_to_run)
 
-    # Print results
-    print("\nExecution Times (in seconds):")
-    for algo, times in results.items():
-        print(f"\n{algo}:")
-        for n, time_taken in times.items():
-            print(f"  n = {n}: {time_taken:.6f} seconds")
+    # Plot results
+    plot_results(results, algo_to_run)
+
+    # Plot worst-case times
+    plot_worst_case(results, algo_to_run)

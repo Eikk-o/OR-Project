@@ -27,10 +27,8 @@ def _bfs(residual, source, sink, parent):
     return False
 
 
-def ford_fulkerson(capacity, source=0, sink=None):
+def ford_fulkerson(capacity, source, sink):
     n = len(capacity)
-    if sink is None:
-        sink = n - 1
 
     # Initialize residual graph
     residual = [row[:] for row in capacity]
@@ -54,6 +52,9 @@ def ford_fulkerson(capacity, source=0, sink=None):
             v = u
         path.reverse()
 
+        print(f"Augmenting path: {path}")
+        print(f"Bottleneck capacity: {bottleneck}")
+
         # Trace output
         print(f"\nIteration {iteration}:")
         print(f" Augmenting path: { ' -> '.join(str(u) for u, _ in path) } -> {sink} with bottleneck {bottleneck}")
@@ -62,6 +63,8 @@ def ford_fulkerson(capacity, source=0, sink=None):
         for u, v in path:
             residual[u][v] -= bottleneck
             residual[v][u] += bottleneck
+        print(f"Flow updated along path: {path}")
+        print(f"Flow added: {bottleneck}")
 
         max_flow += bottleneck
         print(" Updated residual graph:")

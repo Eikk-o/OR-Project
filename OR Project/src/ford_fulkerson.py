@@ -68,6 +68,5 @@ def ford_fulkerson(capacity, source=0, sink=None):
         display_matrix(residual, "Residual Capacity")
 
         iteration += 1
-
-    print(f"\nMax flow value: {max_flow}")
+        
     return max_flow

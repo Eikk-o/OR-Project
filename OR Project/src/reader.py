@@ -46,12 +46,14 @@ def read_capacity_and_cost_matrix(filepath):
 def display_matrix(matrix, name="Matrix"):
     print(f"\n{name}:")
     n = len(matrix)
-    
-    # Afficher l'en-tête
-    print("    " + " ".join(f"{j+1:>4}" for j in range(n)))
-    print("    " + "-----" * n)
 
-    # Afficher chaque ligne avec l'indice de la ligne
+    letters = ['S'] + [chr(ord('A') + i) for i in range(n - 1)]  
+    if n > 1:
+        letters[-1] = 'T'  
+
+    print("     " + " ".join(f"{l:>4}" for l in letters)) 
+    print("    " + "-----" * n)  
+
     for i in range(n):
         row = " ".join(f"{matrix[i][j]:>4}" for j in range(n))
-        print(f"{i+1:>2} | {row}")
+        print(f"{letters[i]:>2} | {row}")  

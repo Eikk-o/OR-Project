@@ -1,7 +1,6 @@
 import time
 import random
-import matplotlib
-import matplotlib as plt
+import matplotlib.pyplot as plt
 from push_relabel import push_relabel_trace
 from min_cost_flow import min_cost_flow
 from ford_fulkerson import ford_fulkerson 

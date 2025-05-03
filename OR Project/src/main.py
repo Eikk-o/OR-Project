@@ -1,6 +1,6 @@
 import os
 from reader import read_capacity_matrix, read_capacity_and_cost_matrix, display_matrix
-from min_cost_flow import bellman_ford 
+from min_cost_flow import bellman_ford, min_cost_flow, letter_to_index, label
 from push_relabel import push_relabel
 
 PROPOSAL_DIR = os.path.join(os.path.dirname(__file__), '..', 'proposals')
@@ -37,8 +37,20 @@ def main():
                 display_matrix(cap, "Capacity Matrix")
                 display_matrix(cost, "Cost Matrix")
 
-                print("\nBellman-Ford algorithm trace (source node = 0):")
-                bellman_ford(cap, cost, source=0)
+                source_letter = input("Enter the source node (as a letter, e.g. 'a'): ").strip()
+                target_letter = input("Enter the target node (as a letter, e.g. 'b'): ").strip()
+                source_index = letter_to_index(source_letter)
+                target_index = letter_to_index(target_letter)
+                F = int(input("Enter the desired total flow (F): "))
+
+
+                print(f"\n🔎 Bellman-Ford algorithm trace (from '{source_letter}'):")
+                bellman_ford(cap, cost, source_index)
+
+                print(f"\nRunning Min Cost Flow algorithm (from '{source_letter}' to '{target_letter}', F = {F})")
+                flow, total_cost = min_cost_flow(len(cap), cap, cost, source_index, target_index, F)
+
+                print(f"\n✅ Min-Cost Flow completed:\n   ➤ Total flow sent: {flow}\n   ➤ Total cost: {total_cost}")
 
             else:
                 print("\nDetection: MAXIMAL FLOW problem.")

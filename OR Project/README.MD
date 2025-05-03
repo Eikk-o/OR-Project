@@ -1,4 +1,4 @@
-                                                                                     Flow Algorithms: Maximum Flow & Minimum-Cost Flow Analysis
+                                                                        Flow Algorithms: Maximum Flow & Minimum-Cost Flow Analysis
 Project Overview
 This project implements and analyzes three fundamental algorithms in network flow theory:
 

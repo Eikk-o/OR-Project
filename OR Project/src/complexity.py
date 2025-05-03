@@ -1,7 +1,8 @@
 import time
 import random
-import matplotlib.pyplot as plt
-from push_relabel import push_relabel
+import matplotlib
+import matplotlib as plt
+from push_relabel import push_relabel_trace
 from min_cost_flow import min_cost_flow
 from ford_fulkerson import ford_fulkerson 
 
@@ -37,7 +38,7 @@ def measure_execution_time(n_values, algorithm="push_relabel"):
             # Measure the selected algorithm
             if algorithm == "push_relabel":
                 start = time.perf_counter()
-                push_relabel(cap_mtx, 0, n - 1)
+                push_relabel_trace(cap_mtx, 0, n - 1)
                 end = time.perf_counter()
             elif algorithm == "min_cost_flow":
                 start = time.perf_counter()

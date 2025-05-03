@@ -58,11 +58,6 @@ def bellman_ford(capacity, cost, source):
 
     return dist
 
-
-
-
-
-
 def min_cost_flow(n: int, C: List[List[int]], D: List[List[int]], 
                  s: int, t: int, F: int) -> Tuple[int, int]:
     # Initialisation des matrices résiduelles
@@ -131,4 +126,3 @@ def min_cost_flow(n: int, C: List[List[int]], D: List[List[int]],
                     print(f"   → Capacité résiduelle de {i} à {j}: {R[i][j]}")
     
     return flow, total_cost
-

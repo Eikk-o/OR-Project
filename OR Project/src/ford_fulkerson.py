@@ -27,10 +27,8 @@ def _bfs(residual, source, sink, parent):
     return False
 
 
-def ford_fulkerson(capacity, source=0, sink=None):
+def ford_fulkerson(capacity, source, sink):
     n = len(capacity)
-    if sink is None:
-        sink = n - 1
 
     residual = [row[:] for row in capacity]  # graphe résiduel
     flow_sent = [[0] * n for _ in range(n)]  # graphe de flux effectif
@@ -60,6 +58,7 @@ def ford_fulkerson(capacity, source=0, sink=None):
         for u, v in path:
             residual[u][v] -= bottleneck
             residual[v][u] += bottleneck
+
             flow_sent[u][v] += bottleneck  # Ajouter le flux envoyé dans le graphe original
 
         max_flow += bottleneck
@@ -80,4 +79,5 @@ def ford_fulkerson(capacity, source=0, sink=None):
     display_matrix(flow_matrix, "Max Flow")
 
     print(f"\nMax flow value: {max_flow}")
+
     return max_flow

@@ -27,9 +27,12 @@ def _bfs(residual, source, sink, parent):
     return False
 
 
-def ford_fulkerson(capacity, source, sink):
+def ford_fulkerson(capacity, source=0, sink=None):
     n = len(capacity)
+    if sink is None:
+        sink = n - 1
 
+    # Initialiser les graphes
     residual = [row[:] for row in capacity]  # graphe résiduel
     flow_sent = [[0] * n for _ in range(n)]  # graphe de flux effectif
     parent = [-1] * n
@@ -39,6 +42,7 @@ def ford_fulkerson(capacity, source, sink):
     print("Initial residual graph:")
     display_matrix(residual, "Residual Capacity")
 
+    # Tant qu’il existe un chemin augmentant
     while _bfs(residual, source, sink, parent):
         # Rechercher le goulot d'étranglement
         path = []
@@ -54,11 +58,10 @@ def ford_fulkerson(capacity, source, sink):
         print(f"\nIteration {iteration}:")
         print(f" Augmenting path: {' -> '.join(str(u) for u, _ in path)} -> {sink} with bottleneck {bottleneck}")
 
-     
+        # Appliquer le flux et mettre à jour les graphes
         for u, v in path:
             residual[u][v] -= bottleneck
             residual[v][u] += bottleneck
-
             flow_sent[u][v] += bottleneck  # Ajouter le flux envoyé dans le graphe original
 
         max_flow += bottleneck
@@ -67,6 +70,7 @@ def ford_fulkerson(capacity, source, sink):
 
         iteration += 1
 
+    # Construction de la matrice finale avec format flow/capacity
     flow_matrix = [['0'] * n for _ in range(n)]
     for i in range(n):
         for j in range(n):
@@ -79,5 +83,4 @@ def ford_fulkerson(capacity, source, sink):
     display_matrix(flow_matrix, "Max Flow")
 
     print(f"\nMax flow value: {max_flow}")
-
     return max_flow

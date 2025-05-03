@@ -32,8 +32,8 @@ def ford_fulkerson(capacity, source=0, sink=None):
     if sink is None:
         sink = n - 1
 
-    # Initialize residual graph
-    residual = [row[:] for row in capacity]
+    residual = [row[:] for row in capacity]  # graphe résiduel
+    flow_sent = [[0] * n for _ in range(n)]  # graphe de flux effectif
     parent = [-1] * n
     max_flow = 0
     iteration = 1
@@ -41,9 +41,8 @@ def ford_fulkerson(capacity, source=0, sink=None):
     print("Initial residual graph:")
     display_matrix(residual, "Residual Capacity")
 
-    # Augment while there is a path from source to sink
     while _bfs(residual, source, sink, parent):
-        # Reconstruct path and find bottleneck
+        # Rechercher le goulot d'étranglement
         path = []
         v = sink
         bottleneck = float('inf')
@@ -54,20 +53,31 @@ def ford_fulkerson(capacity, source=0, sink=None):
             v = u
         path.reverse()
 
-        # Trace output
         print(f"\nIteration {iteration}:")
-        print(f" Augmenting path: { ' -> '.join(str(u) for u, _ in path) } -> {sink} with bottleneck {bottleneck}")
+        print(f" Augmenting path: {' -> '.join(str(u) for u, _ in path)} -> {sink} with bottleneck {bottleneck}")
 
-        # Update residual capacities
+     
         for u, v in path:
             residual[u][v] -= bottleneck
             residual[v][u] += bottleneck
+            flow_sent[u][v] += bottleneck  # Ajouter le flux envoyé dans le graphe original
 
         max_flow += bottleneck
         print(" Updated residual graph:")
         display_matrix(residual, "Residual Capacity")
 
         iteration += 1
+
+    flow_matrix = [['0'] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            if capacity[i][j] > 0:
+                flow_matrix[i][j] = f"{flow_sent[i][j]}/{capacity[i][j]}"
+            else:
+                flow_matrix[i][j] = "0"
+
+    print("\nFinal Max Flow Matrix (flow/capacity):")
+    display_matrix(flow_matrix, "Max Flow")
 
     print(f"\nMax flow value: {max_flow}")
     return max_flow

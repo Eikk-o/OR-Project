@@ -4,7 +4,7 @@ def read_capacity_matrix(filepath):
     """Read a capacity matrix from a .txt file"""
     with open(filepath, 'r') as file:
         lines = file.readlines()
-        n = int(lines[0].strip())  # nombre de sommets
+        n = int(lines[0].strip())  
         capacity_matrix = []
 
         for i in range(1, n+1):

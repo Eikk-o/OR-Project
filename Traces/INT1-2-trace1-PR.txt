@@ -1,0 +1,622 @@
+Detection: MAXIMAL FLOW problem.
+
+Capacity Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    9    5    7    0    0    0    0
+ A |    0    0    6    0    6    0    0    0
+ B |    0    0    0    0    0    7    0    0
+ C |    0    0    0    0    0    2    8    0
+ D |    0    0    3    0    0    0    0    8
+ E |    0    0    0    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+
+Choose the algorithm to perform:
+1. Push-Relabel
+2. Ford-Fulkerson
+Enter the number of the algorithm (1 or 2): 1
+
+Push-Relabel algorithm result:
+PUSH 9 from A to B (initial preflow)
+PUSH 5 from A to C (initial preflow)
+PUSH 7 from A to D (initial preflow)
+
+Initial Residual Capacities (R):
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    6    0    6    0    0    0
+ B |    5    0    0    0    0    7    0    0
+ C |    7    0    0    0    0    2    8    0
+ D |    0    0    3    0    0    0    0    8
+ E |    0    0    0    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+
+Initial Heights: [8, 0, 0, 0, 0, 0, 0, 0]
+Initial Excesses: [-21, 9, 5, 7, 0, 0, 0, 0]
+Iteration 1: RELABEL B from 0 to 1
+
+After iteration 1:
+Heights: [8, 1, 0, 0, 0, 0, 0, 0]
+Excesses: [-21, 9, 5, 7, 0, 0, 0, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    6    0    6    0    0    0
+ B |    5    0    0    0    0    7    0    0
+ C |    7    0    0    0    0    2    8    0
+ D |    0    0    3    0    0    0    0    8
+ E |    0    0    0    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 2: PUSH 6 from B to C; excess[B]=3; excess[C]=11
+
+After iteration 2:
+Heights: [8, 1, 0, 0, 0, 0, 0, 0]
+Excesses: [-21, 3, 11, 7, 0, 0, 0, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    0    0    6    0    0    0
+ B |    5    6    0    0    0    7    0    0
+ C |    7    0    0    0    0    2    8    0
+ D |    0    0    3    0    0    0    0    8
+ E |    0    0    0    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 3: PUSH 3 from B to E; excess[B]=0; excess[E]=3
+
+After iteration 3:
+Heights: [8, 1, 0, 0, 0, 0, 0, 0]
+Excesses: [-21, 0, 11, 7, 3, 0, 0, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    0    0    3    0    0    0
+ B |    5    6    0    0    0    7    0    0
+ C |    7    0    0    0    0    2    8    0
+ D |    0    3    3    0    0    0    0    8
+ E |    0    0    0    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 4: RELABEL C from 0 to 1
+
+After iteration 4:
+Heights: [8, 1, 1, 0, 0, 0, 0, 0]
+Excesses: [-21, 0, 11, 7, 3, 0, 0, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    0    0    3    0    0    0
+ B |    5    6    0    0    0    7    0    0
+ C |    7    0    0    0    0    2    8    0
+ D |    0    3    3    0    0    0    0    8
+ E |    0    0    0    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 5: PUSH 7 from C to F; excess[C]=4; excess[F]=7
+
+After iteration 5:
+Heights: [8, 1, 1, 0, 0, 0, 0, 0]
+Excesses: [-21, 0, 4, 7, 3, 7, 0, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    0    0    3    0    0    0
+ B |    5    6    0    0    0    0    0    0
+ C |    7    0    0    0    0    2    8    0
+ D |    0    3    3    0    0    0    0    8
+ E |    0    0    7    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 6: RELABEL C from 1 to 2
+
+After iteration 6:
+Heights: [8, 1, 2, 0, 0, 0, 0, 0]
+Excesses: [-21, 0, 4, 7, 3, 7, 0, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    0    0    3    0    0    0
+ B |    5    6    0    0    0    0    0    0
+ C |    7    0    0    0    0    2    8    0
+ D |    0    3    3    0    0    0    0    8
+ E |    0    0    7    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 7: PUSH 4 from C to B; excess[C]=0; excess[B]=4
+
+After iteration 7:
+Heights: [8, 1, 2, 0, 0, 0, 0, 0]
+Excesses: [-21, 4, 0, 7, 3, 7, 0, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    3    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    2    8    0
+ D |    0    3    3    0    0    0    0    8
+ E |    0    0    7    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 8: RELABEL D from 0 to 1
+
+After iteration 8:
+Heights: [8, 1, 2, 1, 0, 0, 0, 0]
+Excesses: [-21, 4, 0, 7, 3, 7, 0, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    3    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    2    8    0
+ D |    0    3    3    0    0    0    0    8
+ E |    0    0    7    0    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 9: PUSH 2 from D to F; excess[D]=5; excess[F]=9
+
+After iteration 9:
+Heights: [8, 1, 2, 1, 0, 0, 0, 0]
+Excesses: [-21, 4, 0, 5, 3, 9, 0, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    3    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    8    0
+ D |    0    3    3    0    0    0    0    8
+ E |    0    0    7    2    0    0    0   10
+ F |    0    0    0    0    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 10: PUSH 5 from D to G; excess[D]=0; excess[G]=5
+
+After iteration 10:
+Heights: [8, 1, 2, 1, 0, 0, 0, 0]
+Excesses: [-21, 4, 0, 0, 3, 9, 5, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    3    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    3    3    0    0    0    0    8
+ E |    0    0    7    2    0    0    0   10
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 11: RELABEL E from 0 to 1
+
+After iteration 11:
+Heights: [8, 1, 2, 1, 1, 0, 0, 0]
+Excesses: [-21, 4, 0, 0, 3, 9, 5, 0]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    3    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    3    3    0    0    0    0    8
+ E |    0    0    7    2    0    0    0   10
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    0    0    0    0
+Iteration 12: PUSH 3 from E to H; excess[E]=0; excess[H]=3
+
+After iteration 12:
+Heights: [8, 1, 2, 1, 1, 0, 0, 0]
+Excesses: [-21, 4, 0, 0, 0, 9, 5, 3]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    3    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    3    3    0    0    0    0    5
+ E |    0    0    7    2    0    0    0   10
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    3    0    0    0
+Iteration 13: RELABEL F from 0 to 1
+
+After iteration 13:
+Heights: [8, 1, 2, 1, 1, 1, 0, 0]
+Excesses: [-21, 4, 0, 0, 0, 9, 5, 3]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    3    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    3    3    0    0    0    0    5
+ E |    0    0    7    2    0    0    0   10
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    3    0    0    0
+Iteration 14: PUSH 9 from F to H; excess[F]=0; excess[H]=12
+
+After iteration 14:
+Heights: [8, 1, 2, 1, 1, 1, 0, 0]
+Excesses: [-21, 4, 0, 0, 0, 0, 5, 12]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    3    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    3    3    0    0    0    0    5
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    3    9    0    0
+Iteration 15: RELABEL B from 1 to 2
+
+After iteration 15:
+Heights: [8, 2, 2, 1, 1, 1, 0, 0]
+Excesses: [-21, 4, 0, 0, 0, 0, 5, 12]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    3    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    3    3    0    0    0    0    5
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    3    9    0    0
+Iteration 16: PUSH 3 from B to E; excess[B]=1; excess[E]=3
+
+After iteration 16:
+Heights: [8, 2, 2, 1, 1, 1, 0, 0]
+Excesses: [-21, 1, 0, 0, 3, 0, 5, 12]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    5
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    3    9    0    0
+Iteration 17: RELABEL B from 2 to 3
+
+After iteration 17:
+Heights: [8, 3, 2, 1, 1, 1, 0, 0]
+Excesses: [-21, 1, 0, 0, 3, 0, 5, 12]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    5
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    3    9    0    0
+Iteration 18: PUSH 1 from B to C; excess[B]=0; excess[C]=1
+
+After iteration 18:
+Heights: [8, 3, 2, 1, 1, 1, 0, 0]
+Excesses: [-21, 0, 1, 0, 3, 0, 5, 12]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    3    0    0    0    0    0
+ B |    5    3    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    5
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    3    9    0    0
+Iteration 19: RELABEL G from 0 to 1
+
+After iteration 19:
+Heights: [8, 3, 2, 1, 1, 1, 1, 0]
+Excesses: [-21, 0, 1, 0, 3, 0, 5, 12]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    3    0    0    0    0    0
+ B |    5    3    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    5
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    5
+ T |    0    0    0    0    3    9    0    0
+Iteration 20: PUSH 5 from G to H; excess[G]=0; excess[H]=17
+
+After iteration 20:
+Heights: [8, 3, 2, 1, 1, 1, 1, 0]
+Excesses: [-21, 0, 1, 0, 3, 0, 0, 17]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    3    0    0    0    0    0
+ B |    5    3    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    5
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    3    9    5    0
+Iteration 21: PUSH 3 from E to H; excess[E]=0; excess[H]=20
+
+After iteration 21:
+Heights: [8, 3, 2, 1, 1, 1, 1, 0]
+Excesses: [-21, 0, 1, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    3    0    0    0    0    0
+ B |    5    3    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 22: RELABEL C from 2 to 4
+
+After iteration 22:
+Heights: [8, 3, 4, 1, 1, 1, 1, 0]
+Excesses: [-21, 0, 1, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    3    0    0    0    0    0
+ B |    5    3    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 23: PUSH 1 from C to B; excess[C]=0; excess[B]=1
+
+After iteration 23:
+Heights: [8, 3, 4, 1, 1, 1, 1, 0]
+Excesses: [-21, 1, 0, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 24: RELABEL B from 3 to 5
+
+After iteration 24:
+Heights: [8, 5, 4, 1, 1, 1, 1, 0]
+Excesses: [-21, 1, 0, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 25: PUSH 1 from B to C; excess[B]=0; excess[C]=1
+
+After iteration 25:
+Heights: [8, 5, 4, 1, 1, 1, 1, 0]
+Excesses: [-21, 0, 1, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    3    0    0    0    0    0
+ B |    5    3    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 26: RELABEL C from 4 to 6
+
+After iteration 26:
+Heights: [8, 5, 6, 1, 1, 1, 1, 0]
+Excesses: [-21, 0, 1, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    3    0    0    0    0    0
+ B |    5    3    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 27: PUSH 1 from C to B; excess[C]=0; excess[B]=1
+
+After iteration 27:
+Heights: [8, 5, 6, 1, 1, 1, 1, 0]
+Excesses: [-21, 1, 0, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 28: RELABEL B from 5 to 7
+
+After iteration 28:
+Heights: [8, 7, 6, 1, 1, 1, 1, 0]
+Excesses: [-21, 1, 0, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 29: PUSH 1 from B to C; excess[B]=0; excess[C]=1
+
+After iteration 29:
+Heights: [8, 7, 6, 1, 1, 1, 1, 0]
+Excesses: [-21, 0, 1, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    3    0    0    0    0    0
+ B |    5    3    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 30: RELABEL C from 6 to 8
+
+After iteration 30:
+Heights: [8, 7, 8, 1, 1, 1, 1, 0]
+Excesses: [-21, 0, 1, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    3    0    0    0    0    0
+ B |    5    3    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 31: PUSH 1 from C to B; excess[C]=0; excess[B]=1
+
+After iteration 31:
+Heights: [8, 7, 8, 1, 1, 1, 1, 0]
+Excesses: [-21, 1, 0, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 32: RELABEL B from 7 to 9
+
+After iteration 32:
+Heights: [8, 9, 8, 1, 1, 1, 1, 0]
+Excesses: [-21, 1, 0, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    9    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+Iteration 33: PUSH 1 from B to A; excess[B]=0; excess[A]=-20
+
+After iteration 33:
+Heights: [8, 9, 8, 1, 1, 1, 1, 0]
+Excesses: [-20, 0, 0, 0, 0, 0, 0, 20]
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    1    0    0    0    0    0    0
+ A |    8    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+
+Value of the max flow max = 20
+
+
+Max Flow: 20
+
+Residual Graph after Push-Relabel:
+
+Residual Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    1    0    0    0    0    0    0
+ A |    8    0    4    0    0    0    0    0
+ B |    5    2    0    0    0    0    0    0
+ C |    7    0    0    0    0    0    3    0
+ D |    0    6    3    0    0    0    0    2
+ E |    0    0    7    2    0    0    0    1
+ F |    0    0    0    5    0    3    0    0
+ T |    0    0    0    0    6    9    5    0
+
+✅ Maximum Flow: 20

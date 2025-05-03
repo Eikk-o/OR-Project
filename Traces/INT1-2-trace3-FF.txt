@@ -1,0 +1,174 @@
+Please enter the proposal number (1-10) or 'q' to quit: 3
+
+Detection: MAXIMAL FLOW problem.
+
+Capacity Matrix:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    5    8    4    0    0    0    0
+ A |    0    0    4    0    7    0    0    0
+ B |    0    0    0    0    0    7    8    0
+ C |    0    0    7    0    0    0    4    0
+ D |    0    0    0    0    0    6    0    0
+ E |    0    0    0    0    0    0    0    7
+ F |    0    0    0    0    0    0    0   10
+ T |    0    0    0    0    0    0    0    0
+
+Choose the algorithm to perform:
+1. Push-Relabel
+2. Ford-Fulkerson
+Enter the number of the algorithm (1 or 2): 2
+
+Ford-Fulkerson algorithm trace:
+Initial residual graph:
+
+Residual Capacity:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    5    8    4    0    0    0    0
+ A |    0    0    4    0    7    0    0    0
+ B |    0    0    0    0    0    7    8    0
+ C |    0    0    7    0    0    0    4    0
+ D |    0    0    0    0    0    6    0    0
+ E |    0    0    0    0    0    0    0    7
+ F |    0    0    0    0    0    0    0   10
+ T |    0    0    0    0    0    0    0    0
+BFS levels and predecessors:
+ node 1 <- 0 (level 1)
+ node 2 <- 0 (level 1)
+ node 3 <- 0 (level 1)
+ node 4 <- 1 (level 2)
+ node 5 <- 2 (level 2)
+ node 6 <- 2 (level 2)
+ node 7 <- 5 (level 3)
+
+Iteration 1:
+ Augmenting path: 0 -> 2 -> 5 -> 7 with bottleneck 7
+ Updated residual graph:
+
+Residual Capacity:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    5    1    4    0    0    0    0
+ A |    0    0    4    0    7    0    0    0
+ B |    7    0    0    0    0    0    8    0
+ C |    0    0    7    0    0    0    4    0
+ D |    0    0    0    0    0    6    0    0
+ E |    0    0    7    0    0    0    0    0
+ F |    0    0    0    0    0    0    0   10
+ T |    0    0    0    0    0    7    0    0
+BFS levels and predecessors:
+ node 1 <- 0 (level 1)
+ node 2 <- 0 (level 1)
+ node 3 <- 0 (level 1)
+ node 4 <- 1 (level 2)
+ node 6 <- 2 (level 2)
+ node 5 <- 4 (level 3)
+ node 7 <- 6 (level 3)
+
+Iteration 2:
+ Augmenting path: 0 -> 2 -> 6 -> 7 with bottleneck 1
+ Updated residual graph:
+
+Residual Capacity:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    5    0    4    0    0    0    0
+ A |    0    0    4    0    7    0    0    0
+ B |    8    0    0    0    0    0    7    0
+ C |    0    0    7    0    0    0    4    0
+ D |    0    0    0    0    0    6    0    0
+ E |    0    0    7    0    0    0    0    0
+ F |    0    0    1    0    0    0    0    9
+ T |    0    0    0    0    0    7    1    0
+BFS levels and predecessors:
+ node 1 <- 0 (level 1)
+ node 3 <- 0 (level 1)
+ node 2 <- 1 (level 2)
+ node 4 <- 1 (level 2)
+ node 6 <- 3 (level 2)
+ node 5 <- 4 (level 3)
+ node 7 <- 6 (level 3)
+
+Iteration 3:
+ Augmenting path: 0 -> 3 -> 6 -> 7 with bottleneck 4
+ Updated residual graph:
+
+Residual Capacity:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    5    0    0    0    0    0    0
+ A |    0    0    4    0    7    0    0    0
+ B |    8    0    0    0    0    0    7    0
+ C |    4    0    7    0    0    0    0    0
+ D |    0    0    0    0    0    6    0    0
+ E |    0    0    7    0    0    0    0    0
+ F |    0    0    1    4    0    0    0    5
+ T |    0    0    0    0    0    7    5    0
+BFS levels and predecessors:
+ node 1 <- 0 (level 1)
+ node 2 <- 1 (level 2)
+ node 4 <- 1 (level 2)
+ node 6 <- 2 (level 3)
+ node 5 <- 4 (level 3)
+ node 3 <- 6 (level 4)
+ node 7 <- 6 (level 4)
+
+Iteration 4:
+ Augmenting path: 0 -> 1 -> 2 -> 6 -> 7 with bottleneck 4
+ Updated residual graph:
+
+Residual Capacity:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    1    0    0    0    0    0    0
+ A |    4    0    0    0    7    0    0    0
+ B |    8    4    0    0    0    0    3    0
+ C |    4    0    7    0    0    0    0    0
+ D |    0    0    0    0    0    6    0    0
+ E |    0    0    7    0    0    0    0    0
+ F |    0    0    5    4    0    0    0    1
+ T |    0    0    0    0    0    7    9    0
+BFS levels and predecessors:
+ node 1 <- 0 (level 1)
+ node 4 <- 1 (level 2)
+ node 5 <- 4 (level 3)
+ node 2 <- 5 (level 4)
+ node 6 <- 2 (level 5)
+ node 3 <- 6 (level 6)
+ node 7 <- 6 (level 6)
+
+Iteration 5:
+ Augmenting path: 0 -> 1 -> 4 -> 5 -> 2 -> 6 -> 7 with bottleneck 1
+ Updated residual graph:
+
+Residual Capacity:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0    0    0    0    0    0    0    0
+ A |    5    0    0    0    6    0    0    0
+ B |    8    4    0    0    0    1    2    0
+ C |    4    0    7    0    0    0    0    0
+ D |    0    1    0    0    0    5    0    0
+ E |    0    0    6    0    1    0    0    0
+ F |    0    0    6    4    0    0    0    0
+ T |    0    0    0    0    0    7   10    0
+BFS levels and predecessors:
+
+Final Max Flow Matrix (flow/capacity):
+
+Max Flow:
+        S    A    B    C    D    E    F    T
+    ----------------------------------------
+ S |    0  5/5  8/8  4/4    0    0    0    0
+ A |    0    0  4/4    0  1/7    0    0    0
+ B |    0    0    0    0    0  7/7  6/8    0
+ C |    0    0  0/7    0    0    0  4/4    0
+ D |    0    0    0    0    0  1/6    0    0
+ E |    0    0    0    0    0    0    0  7/7
+ F |    0    0    0    0    0    0    0 10/10
+ T |    0    0    0    0    0    0    0    0
+
+Max flow value: 17
+
+✅ Maximum Flow: 17

@@ -1,0 +1,106 @@
+Please enter the proposal number (1-10) or 'q' to quit: 8
+
+Detection: MINIMAL COST FLOW problem.
+
+Capacity Matrix:
+        S    A    B    C    D    E    T
+    -----------------------------------
+ S |    0   31   25   27    0    0    0
+ A |    0    0   20    0   12    0    0
+ B |    0    0    0    0    6    0    0
+ C |    0    0   30    0    0   35    0
+ D |    0    0    0    0    0    0   30
+ E |    0    0   11    0   10    0   40
+ T |    0    0    0    0    0    0    0
+
+Cost Matrix:
+        S    A    B    C    D    E    T
+    -----------------------------------
+ S |    0    8    4   15    0    0    0
+ A |    0    0    7    0   16    0    0
+ B |    0    0    0    0    3    0    0
+ C |    0    0    8    0    0   20    0
+ D |    0    0    0    0    0    0   22
+ E |    0    0    0    0   15    0   15
+ T |    0    0    0    0    0    0    0
+Enter the source node (as a letter, e.g. 'a'): s
+Enter the target node (as a letter, e.g. 'b'): a
+Enter the desired total flow (F): 4
+
+Running Bellman algorithm (from 's' to 'a')
+Step 0 : [0, '∞', '∞', '∞', '∞', '∞', '∞']
+Step 1 : [0, 8, 4, 15, '∞', '∞', '∞']
+Step 2 : [0, 8, 4, 15, 7, '∞', '∞']
+Step 3 : [0, 8, 4, 15, 7, '∞', 29]
+Step 4 : [0, 8, 4, 15, 7, '∞', 29]
+🔁 Stopping early: no updates for 2 consecutive steps.
+
+Shortest paths from source:
+ - Node s: distance = 0, path = ['s']
+ - Node a: distance = 8, path = ['s', 'a']
+ - Node b: distance = 4, path = ['s', 'b']
+ - Node c: distance = 15, path = ['s', 'c']
+ - Node d: distance = 7, path = ['s', 'b', 'd']
+ - Node e: unreachable
+ - Node t: distance = 29, path = ['s', 'b', 'd', 't']
+
+Running Min Cost Flow algorithm (from 's' to 'a', F = 4)
+
+
+Residual Capacity:
+        S    A    B    C    D    E    T
+    -----------------------------------
+ S |    0   31   25   27    0    0    0
+ A |    0    0   20    0   12    0    0
+ B |    0    0    0    0    6    0    0
+ C |    0    0   30    0    0   35    0
+ D |    0    0    0    0    0    0   30
+ E |    0    0   11    0   10    0   40
+ T |    0    0    0    0    0    0    0
+
+Residual Cost:
+        S    A    B    C    D    E    T
+    -----------------------------------
+ S |    0    8    4   15    0    0    0
+ A |   -8    0    7    0   16    0    0
+ B |   -4   -7    0   -8    3    0    0
+ C |  -15    0    8    0    0   20    0
+ D |    0  -16   -3    0    0  -15   22
+ E |    0    0    0  -20   15    0   15
+ T |    0    0    0    0  -22  -15    0
+
+Iteration 1:
+Augmenting path: S -> A
+Bottleneck flow: 4
+Path cost: 32
+Updated residual graphs:
+
+Residual Capacity:
+        S    A    B    C    D    E    T
+    -----------------------------------
+ S |    0   27   25   27    0    0    0
+ A |    4    0   20    0   12    0    0
+ B |    0    0    0    0    6    0    0
+ C |    0    0   30    0    0   35    0
+ D |    0    0    0    0    0    0   30
+ E |    0    0   11    0   10    0   40
+ T |    0    0    0    0    0    0    0
+
+Residual Cost:
+        S    A    B    C    D    E    T
+    -----------------------------------
+ S |    0    8    4   15    0    0    0
+ A |   -8    0    7    0   16    0    0
+ B |   -4   -7    0   -8    3    0    0
+ C |  -15    0    8    0    0   20    0
+ D |    0  -16   -3    0    0  -15   22
+ E |    0    0    0  -20   15    0   15
+ T |    0    0    0    0  -22  -15    0
+
+Final result:
+Achieved flow: 4
+Minimum cost: 32
+
+✅ Min-Cost Flow completed:
+   ➤ Total flow sent: 4
+   ➤ Total cost: 32

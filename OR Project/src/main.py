@@ -1,6 +1,6 @@
 import os
 from reader import read_capacity_matrix, read_capacity_and_cost_matrix, display_matrix
-from min_cost_flow import bellman_ford, min_cost_flow, letter_to_index, label
+from min_cost_flow import bellman_ford
 from push_relabel import push_relabel
 
 PROPOSAL_DIR = os.path.join(os.path.dirname(__file__), '..', 'proposals')
@@ -68,7 +68,7 @@ def main():
                         max_flow = push_relabel(cap, 0, len(cap) - 1)
                         break
                     elif algorithm_choice == "2":
-                        print("\nEdmonds-Karp algorithm result:")
+                        print("\nFord-Fulkerson algorithm result:")
                         # max_flow = ff(cap, source, sink)
                         max_flow = 0  # Placeholder for the actual FF algorithm implementation
                         break

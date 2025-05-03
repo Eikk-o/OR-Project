@@ -29,4 +29,4 @@ def bellman_ford(capacity, cost, source):
 
     return dist
 
-min_cost_flow(capacity_matrix, cost_matrix, s, t, flow_val)
+# min_cost_flow(capacity_matrix, cost_matrix, s, t, flow_val)

@@ -1,7 +1,8 @@
 import os
 from reader import read_capacity_matrix, read_capacity_and_cost_matrix, display_matrix
-from min_cost_flow import bellman_ford, min_cost_flow, letter_to_index, label
+from min_cost_flow import bellman_ford, min_cost_flow, letter_to_index
 from push_relabel import push_relabel
+from ford_fulkerson import ford_fulkerson
 
 PROPOSAL_DIR = os.path.join(os.path.dirname(__file__), '..', 'proposals')
 
@@ -15,6 +16,7 @@ def is_min_cost_problem(filepath):
             except ValueError:
                 return False
     return False
+
 
 def main():
     print("==== Project Operation Research ====")
@@ -43,8 +45,7 @@ def main():
                 target_index = letter_to_index(target_letter)
                 F = int(input("Enter the desired total flow (F): "))
 
-
-                print(f"\n🔎 Bellman-Ford algorithm trace (from '{source_letter}'):")
+                print(f"\n🔎 Bellman-Ford algorithm trace (from '{source_letter}'): ")
                 bellman_ford(cap, cost, source_index)
 
                 print(f"\nRunning Min Cost Flow algorithm (from '{source_letter}' to '{target_letter}', F = {F})")
@@ -60,7 +61,7 @@ def main():
                 while True:
                     print("\nChoose the algorithm to perform:")
                     print("1. Push-Relabel")
-                    print("2. FF")
+                    print("2. Ford-Fulkerson")
                     algorithm_choice = input("Enter the number of the algorithm (1 or 2): ")
 
                     if algorithm_choice == "1":
@@ -68,13 +69,13 @@ def main():
                         max_flow = push_relabel(cap, 0, len(cap) - 1)
                         break
                     elif algorithm_choice == "2":
-                        print("\nEdmonds-Karp algorithm result:")
-                        # max_flow = ff(cap, source, sink)
-                        max_flow = 0  # Placeholder for the actual FF algorithm implementation
+                        print("\nFord-Fulkerson algorithm trace:")
+                        max_flow = ford_fulkerson(cap, source=0, sink=len(cap) - 1)
                         break
                     else:
                         print("❌ Invalid choice. Please enter 1 or 2.")
-                print(f"Maximum Flow: {max_flow}")
+
+                print(f"\n✅ Maximum Flow: {max_flow}")
 
         except Exception as e:
             print(f"❌ Error during the analysis: {e}")

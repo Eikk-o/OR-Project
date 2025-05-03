@@ -1,6 +1,6 @@
 import os
 from reader import read_capacity_matrix, read_capacity_and_cost_matrix, display_matrix
-from min_cost_flow import bellman_ford
+from min_cost_flow import bellman_ford, label, display_labeled_matrix, letter_to_index
 from push_relabel import push_relabel
 
 PROPOSAL_DIR = os.path.join(os.path.dirname(__file__), '..', 'proposals')

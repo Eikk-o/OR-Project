@@ -1,7 +1,8 @@
 import os
 from reader import read_capacity_matrix, read_capacity_and_cost_matrix, display_matrix
-from min_cost_flow import bellman_ford, min_cost_flow, letter_to_index
-from push_relabel import push_relabel
+from min_cost_flow import min_cost_flow, bellman_ford, letter_to_index, build_node_map, index_to_letter, bellman
+from push_relabel import push_relabel_trace, display_matrix
+
 from ford_fulkerson import ford_fulkerson
 
 PROPOSAL_DIR = os.path.join(os.path.dirname(__file__), '..', 'proposals')
@@ -16,7 +17,6 @@ def is_min_cost_problem(filepath):
             except ValueError:
                 return False
     return False
-
 
 def main():
     print("==== Project Operation Research ====")
@@ -41,15 +41,19 @@ def main():
 
                 source_letter = input("Enter the source node (as a letter, e.g. 'a'): ").strip()
                 target_letter = input("Enter the target node (as a letter, e.g. 'b'): ").strip()
-                source_index = letter_to_index(source_letter)
-                target_index = letter_to_index(target_letter)
+                source_index = letter_to_index(source_letter, len(cap))
+                target_index = letter_to_index(target_letter, len(cap))
+
                 F = int(input("Enter the desired total flow (F): "))
 
-                print(f"\n🔎 Bellman-Ford algorithm trace (from '{source_letter}'): ")
-                bellman_ford(cap, cost, source_index)
+                
+                print(f"\nRunning Bellman algorithm (from '{source_letter}' to '{target_letter}')")
+                distances, predecessors = bellman(cost, source_index)
+
+
 
                 print(f"\nRunning Min Cost Flow algorithm (from '{source_letter}' to '{target_letter}', F = {F})")
-                flow, total_cost = min_cost_flow(len(cap), cap, cost, source_index, target_index, F)
+                flow, total_cost = min_cost_flow(cap, cost, F, source_index, target_index)
 
                 print(f"\n✅ Min-Cost Flow completed:\n   ➤ Total flow sent: {flow}\n   ➤ Total cost: {total_cost}")
 
@@ -66,7 +70,11 @@ def main():
 
                     if algorithm_choice == "1":
                         print("\nPush-Relabel algorithm result:")
-                        max_flow = push_relabel(cap, 0, len(cap) - 1)
+                        max_flow, residual_graph = push_relabel_trace(cap, 0, len(cap) - 1)
+    
+                        print(f"\nMax Flow: {max_flow}")
+                        print("\nResidual Graph after Push-Relabel:")
+                        display_matrix(residual_graph, "Residual Matrix")
                         break
                     elif algorithm_choice == "2":
                         print("\nFord-Fulkerson algorithm trace:")
